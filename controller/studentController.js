@@ -4,8 +4,8 @@ const Student = require("../model/Student");
 
 const createStudents = async (req, res) => {
   try {
-    const { name, studentId, address, paid, totalAmount } = req.body;
-    if (!name || !studentId || !address || !paid || !totalAmount) {
+    const { name, Class, studentId, address, paid, totalAmount } = req.body;
+    if (!name || !Class || !studentId || !address || !paid || !totalAmount) {
       res.status(400).json({ message: "student details required" });
     }
 
@@ -14,7 +14,7 @@ const createStudents = async (req, res) => {
       res.status(400).json({ message: "student already existed " });
     }
 
-    const user = new Student({ name, studentId, address, paid, totalAmount });
+    const user = new Student({ name, Class, studentId, address, paid, totalAmount });
     await user.save();
     res
       .status(200)

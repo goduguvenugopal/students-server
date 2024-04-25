@@ -5,10 +5,14 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  Class: {
+    type: String,
+    required: true,
+  },
   studentId: {
     type: String,
     required: true,
-    unique : true
+    unique: true,
   },
   address: {
     type: String,
@@ -24,7 +28,6 @@ const studentSchema = new mongoose.Schema({
   },
 });
 
+const Student = mongoose.model("Student", studentSchema);
 
-const Student = mongoose.model("Student", studentSchema)
-
-module.exports = Student
+module.exports = Student;
