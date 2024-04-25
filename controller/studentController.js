@@ -14,7 +14,14 @@ const createStudents = async (req, res) => {
       res.status(400).json({ message: "student already existed " });
     }
 
-    const user = new Student({ name, Class, studentId, address, paid, totalAmount });
+    const user = new Student({
+      name,
+      Class,
+      studentId,
+      address,
+      paid,
+      totalAmount,
+    });
     await user.save();
     res
       .status(200)
@@ -40,4 +47,19 @@ const getStudents = async (req, res) => {
   }
 };
 
-module.exports = { createStudents, getStudents };
+//students delete method controller code
+
+const deleteStudents = async (req, res) => {
+  try {
+    const students = await Student.findByIdAndDelete(req.params.id);
+    if (!students) {
+      res.status(404).json({ message: "student not found" });
+    }
+    res.status(200).json(students);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error occured at server side" });
+  }
+};
+
+module.exports = { createStudents, getStudents,deleteStudents };
