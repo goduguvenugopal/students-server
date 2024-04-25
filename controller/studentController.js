@@ -25,4 +25,19 @@ const createStudents = async (req, res) => {
   }
 };
 
-module.exports = createStudents;
+// students details get method controller code
+
+const getStudents = async (req, res) => {
+  try {
+    const students = await Student.find();
+    if (!students) {
+      res.status(404).json({ message: "students not found" });
+    }
+    res.status(200).json(students);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error occured at server side" });
+  }
+};
+
+module.exports = { createStudents, getStudents };
