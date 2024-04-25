@@ -2,7 +2,7 @@ const Student = require("../model/Student");
 
 //students post method
 
-const createStudents = async (req, res) => {
+const createStudent = async (req, res) => {
   try {
     const { name, Class, studentId, address, paid, totalAmount } = req.body;
     if (!name || !Class || !studentId || !address || !paid || !totalAmount) {
@@ -49,7 +49,7 @@ const getStudents = async (req, res) => {
 
 //students delete method controller code
 
-const deleteStudents = async (req, res) => {
+const deleteStudent = async (req, res) => {
   try {
     const students = await Student.findByIdAndDelete(req.params.id);
     if (!students) {
@@ -62,4 +62,23 @@ const deleteStudents = async (req, res) => {
   }
 };
 
-module.exports = { createStudents, getStudents,deleteStudents };
+// findbyone method controller code
+
+const findOneStudent = async (req, res) => {
+  try {
+    const { studentId } = req.body;
+    if (!studentId) {
+      return res.status(400).json({ message: "Student ID is required" });
+    }
+    const students = await Student.findOne({ studentId });
+    if (!students) {
+      res.status(404).json({ message: "student not found" });
+    }
+    res.status(200).json(students);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error occured at server side" });
+  }
+};
+
+module.exports = { createStudent, getStudents, deleteStudent, findOneStudent };
