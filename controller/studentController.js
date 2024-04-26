@@ -32,7 +32,7 @@ const createStudent = async (req, res) => {
   }
 };
 
-// students details get method controller code
+// students details get method controller logic code
 
 const getStudents = async (req, res) => {
   try {
@@ -47,7 +47,7 @@ const getStudents = async (req, res) => {
   }
 };
 
-//students delete method controller code
+//students delete method controller logic code
 
 const deleteStudent = async (req, res) => {
   try {
@@ -62,7 +62,7 @@ const deleteStudent = async (req, res) => {
   }
 };
 
-// findbyone method controller code
+// findbyone method controller logic code
 
 const findOneStudent = async (req, res) => {
   try {
@@ -81,4 +81,41 @@ const findOneStudent = async (req, res) => {
   }
 };
 
-module.exports = { createStudent, getStudents, deleteStudent, findOneStudent };
+//findOneAndUpdate method controller logic code
+
+const findUpdateStudent = async (req, res) => {
+  try {
+    const { studentId, pay } = req.body;
+    const updateStudent = await Student.findOneAndUpdate(
+      { studentId: studentId },
+      { $set: { paid: pay } },
+      { new: true }
+    );
+
+    if (!updateStudent) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+    res.status(200).json(updateStudent);
+  } catch (error) {
+    console.error("Error updating employee:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// findbyid method controller logic code 
+
+const findByIdUpdateStudent = async (req , res)=>{
+  try{
+    const { name, Class, studentId, address, paid, totalAmount } = req.body
+
+    const updateAll = await Student
+  }
+}
+
+module.exports = {
+  createStudent,
+  getStudents,
+  deleteStudent,
+  findOneStudent,
+  findUpdateStudent,
+};
