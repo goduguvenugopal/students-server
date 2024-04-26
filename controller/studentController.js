@@ -93,24 +93,33 @@ const findUpdateStudent = async (req, res) => {
     );
 
     if (!updateStudent) {
-      return res.status(404).json({ message: "Employee not found" });
+      return res.status(404).json({ message: "student not found" });
     }
     res.status(200).json(updateStudent);
   } catch (error) {
-    console.error("Error updating employee:", error);
+    console.error("Error updating student:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-// findbyid method controller logic code 
+// findbyid method controller logic code
 
-const findByIdUpdateStudent = async (req , res)=>{
-  try{
-    const { name, Class, studentId, address, paid, totalAmount } = req.body
+const findByIdUpdateStudent = async (req, res) => {
+  try {
+    const dataAll = req.body;
 
-    const updateAll = await Student
+    const updateAll = await Student.findByIdAndUpdate(req.params.id, dataAll, {
+      new: true,
+    });
+    if (!updateAll) {
+      return res.status(404).json({ message: "student not found" });
+    }
+    res.status(200).json(updateAll);
+  } catch (error) {
+    console.error("Error updating students:", error);
+    res.status(500).json({ message: "Server error" });
   }
-}
+};
 
 module.exports = {
   createStudent,
@@ -118,4 +127,6 @@ module.exports = {
   deleteStudent,
   findOneStudent,
   findUpdateStudent,
+  findByIdUpdateStudent
+
 };

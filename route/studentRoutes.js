@@ -8,5 +8,5 @@ router.get("/get-students", studentsController.getStudents);
 router.delete("/del-students/:id",studentsController.deleteStudent)
 router.post("/find-student",studentsController.findOneStudent)
 router.put("/update-one",studentsController.findUpdateStudent)
-
+router.put("/update-all" , studentsController.findByIdUpdateStudent)
 module.exports = router;
