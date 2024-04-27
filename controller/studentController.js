@@ -1,4 +1,8 @@
 const Student = require("../model/Student");
+const dotEnv = require("dotenv");
+const jwt = require("jsonwebtoken");
+
+dotEnv.config();
 
 //students post method
 
@@ -121,12 +125,28 @@ const findByIdUpdateStudent = async (req, res) => {
   }
 };
 
+// login controller code for verification
+const pass = process.env.LOG_IN;
+
+const loginFunc = async (req, res) => {
+  try {
+    const { password } = req.body;
+    if (password !== pass) {
+      res.status(404).json({ message: "password not matched" });
+    }
+    res.status(200).json({ message: "password matched" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "server error" });
+  }
+};
+
 module.exports = {
   createStudent,
   getStudents,
   deleteStudent,
   findOneStudent,
   findUpdateStudent,
-  findByIdUpdateStudent
-
+  findByIdUpdateStudent,
+  loginFunc
 };
