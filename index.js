@@ -12,7 +12,7 @@ const port = process.env.PORT || 5000;
 dotEnv.config()
 app.use(express.static("public"))
 app.use(bodyParser.json())
-app.use(cors({orgin : "*"}))
+app.use(cors({orgin : "https://orgdashboard.netlify.app/"}))
 
 // mongodb connection to the server
 mongoose.connect(process.env.MONGO_DB)
