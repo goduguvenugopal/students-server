@@ -26,6 +26,11 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  joiningDate : {
+    type : String,
+    required : true
+  }
+
 });
 
 const Student = mongoose.model("Student", studentSchema);
