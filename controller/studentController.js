@@ -86,20 +86,22 @@ const findOneStudent = async (req, res) => {
 };
 
 //findOneAndUpdate method controller logic code
-
 const findUpdateStudent = async (req, res) => {
   try {
     const { studentId, pay } = req.body;
-    const updateStudent = await Student.findOneAndUpdate(
-      { studentId: studentId },
-      { $set: { paid: pay } },
-      { new: true }
+    
+   
+    const updatedStudent = await Student.findOneAndUpdate(
+      { _id: studentId },  
+      { $inc: { paid : pay } }, 
+      { new: true }  
     );
 
-    if (!updateStudent) {
-      return res.status(404).json({ message: "student not found" });
+    if (!updatedStudent) {
+      return res.status(404).json({ message: "Student not found" });
     }
-    res.status(200).json(updateStudent);
+
+    res.status(200).json(updatedStudent);
   } catch (error) {
     console.error("Error updating student:", error);
     res.status(500).json({ message: "Server error" });
