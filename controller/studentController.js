@@ -1,6 +1,5 @@
 const Student = require("../model/Student");
 const dotEnv = require("dotenv");
-const jwt = require("jsonwebtoken");
 
 dotEnv.config();
 
@@ -8,7 +7,8 @@ dotEnv.config();
 
 const createStudent = async (req, res) => {
   try {
-    const { name, Class, studentId, address, paid, totalAmount ,joiningDate} = req.body;
+    const { name, Class, studentId, address, paid, totalAmount, joiningDate } =
+      req.body;
     if (!name || !Class || !studentId || !address || !paid || !totalAmount) {
       res.status(400).json({ message: "student details required" });
     }
@@ -25,8 +25,7 @@ const createStudent = async (req, res) => {
       address,
       paid,
       totalAmount,
-      joiningDate
-      
+      joiningDate,
     });
     await user.save();
     res
@@ -91,12 +90,13 @@ const findOneStudent = async (req, res) => {
 const findUpdateStudent = async (req, res) => {
   try {
     const { studentId, pay } = req.body;
-    
-   
+
+    const currentDate = new Date();
+
     const updatedStudent = await Student.findOneAndUpdate(
-      { studentId : studentId },  
-      { $inc: { paid : pay } }, 
-      { new: true }  
+      { studentId: studentId },
+      { $inc: { paid: pay }, $set: { lastPaymentDate: currentDate } },
+      { new: true }
     );
 
     if (!updatedStudent) {
