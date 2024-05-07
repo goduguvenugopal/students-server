@@ -92,7 +92,7 @@ const findUpdateStudent = async (req, res) => {
   try {
     const { studentId, pay } = req.body;
 
-    const currentDate = new Date().toLocaleString();
+    const currentDate = new Date().toLocaleDateString('en-GB');
 
     const updatedStudent = await Student.findOneAndUpdate(
       { studentId: studentId },
