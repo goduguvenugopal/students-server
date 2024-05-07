@@ -29,6 +29,10 @@ const studentSchema = new mongoose.Schema({
   joiningDate : {
     type : String,
     required : true
+  },
+  lastPaymentDate : {
+    type : String
+    
   }
 
 });

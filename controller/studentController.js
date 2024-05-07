@@ -7,7 +7,7 @@ dotEnv.config();
 
 const createStudent = async (req, res) => {
   try {
-    const { name, Class, studentId, address, paid, totalAmount, joiningDate } =
+    const { name, Class, studentId, address, paid, totalAmount, joiningDate,lastPaymentDate } =
       req.body;
     if (!name || !Class || !studentId || !address || !paid || !totalAmount) {
       res.status(400).json({ message: "student details required" });
@@ -26,6 +26,7 @@ const createStudent = async (req, res) => {
       paid,
       totalAmount,
       joiningDate,
+      lastPaymentDate
     });
     await user.save();
     res
