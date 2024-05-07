@@ -92,7 +92,7 @@ const findUpdateStudent = async (req, res) => {
     
    
     const updatedStudent = await Student.findOneAndUpdate(
-      { _id: studentId },  
+      { studentId : studentId },  
       { $inc: { paid : pay } }, 
       { new: true }  
     );
