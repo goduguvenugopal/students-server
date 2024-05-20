@@ -137,15 +137,10 @@ const findByIdUpdateStudent = async (req, res) => {
 
 const loginFunc = (req , res)=>{
   try{
-    const {password} = req.body;
-
+  
     const userPass = process.env.PASSWORD
-
-    if(password === userPass){
-      res.status(200).json({message : "user successfully logged in "})
-    } else {
-      return res.status(401).json({ message: "Invalid password" });
-    }
+     
+    res.status(200).json(userPass)
     
   }catch(error){
     console.log(error)
