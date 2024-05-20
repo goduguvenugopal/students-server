@@ -3,7 +3,7 @@ const dotEnv = require("dotenv");
 
 dotEnv.config();
 
-const password = process.env.PASSWORD
+ 
 
 
 //students post method
@@ -135,12 +135,16 @@ const findByIdUpdateStudent = async (req, res) => {
 
 // login controller code
 
-const loginFunc = async (req , res)=>{
+const loginFunc = (req , res)=>{
   try{
     const {password} = req.body;
 
-    if(password === password){
+    const userPass = process.env.PASSWORD
+
+    if(password === userPass){
       res.status(200).json({message : "user successfully logged in "})
+    } else {
+      return res.status(401).json({ message: "Invalid password" });
     }
     
   }catch(error){
