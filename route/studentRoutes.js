@@ -9,6 +9,7 @@ router.delete("/del-students/:id",studentsController.deleteStudent)
 router.post("/find-student",studentsController.findOneStudent)
 router.put("/update-one",studentsController.findUpdateStudent)
 router.put("/update-all/:id" , studentsController.findByIdUpdateStudent)
+router.post("/login",studentsController.loginFunc)
  
 
 module.exports = router;

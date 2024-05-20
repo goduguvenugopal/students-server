@@ -3,6 +3,9 @@ const dotEnv = require("dotenv");
 
 dotEnv.config();
 
+const password = process.env.PASSWORD
+
+
 //students post method
 
 const createStudent = async (req, res) => {
@@ -130,6 +133,22 @@ const findByIdUpdateStudent = async (req, res) => {
   }
 };
 
+// login controller code
+
+const loginFunc = async (req , res)=>{
+  try{
+    const {password} = req.body;
+
+    if(password === password){
+      res.status(200).json({message : "user successfully logged in "})
+    }
+    
+  }catch(error){
+    console.log(error)
+    res.status(500).json({message : "internal server error"})
+  }
+}
+
 module.exports = {
   createStudent,
   getStudents,
@@ -137,4 +156,5 @@ module.exports = {
   findOneStudent,
   findUpdateStudent,
   findByIdUpdateStudent,
+  loginFunc
 };
